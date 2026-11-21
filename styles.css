@@ -68,6 +68,7 @@ section > p { margin: 0; }
 .paper p { margin: 0; }
 .paper-title { font-weight: 570; line-height: 1.45; }
 .paper-authors, .paper-citation, .timeline-note { color: var(--muted); font-size: .9375rem; }
+.paper-citation cite { color: #78533d; }
 .paper-authors strong { color: #202124; }
 .doi { overflow-wrap: anywhere; }
 
@@ -76,8 +77,13 @@ section > p { margin: 0; }
 .timeline li + li { margin-top: .55rem; }
 .timeline .date { font-variant-numeric: tabular-nums; font-size: .9375rem; }
 .timeline-note { margin: .06rem 0 0; }
-.supervision h3 { margin-bottom: .55rem; }
-.supervision .timeline + h3 { margin-top: 1.2rem; }
+.grouped-section > h3 { margin-bottom: .55rem; }
+.grouped-section > ul + h3 { margin-top: 1.2rem; }
+.teaching-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
 
 .photo-gallery {
   display: grid;
@@ -93,6 +99,8 @@ section > p { margin: 0; }
 footer { font-size: .9375rem; }
 
 @media (max-width: 44rem) {
+  html[lang="en"] .teaching-columns { grid-template-columns: 1fr; }
+  html[lang="zh-CN"] .teaching-columns { gap: .8rem; }
   .site-header { grid-template-columns: minmax(0, 1fr) auto; gap: .45rem .75rem; }
   .main-nav { grid-row: 2; grid-column: 1 / -1; justify-content: flex-start; }
   .languages { grid-row: 1; grid-column: 2; border: 0; padding: 0; }
