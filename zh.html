@@ -454,7 +454,35 @@
     </li>
   </ul>
     </section>
-    <footer><a href="https://faculty.nuist.edu.cn/zijinli/zh_CN/index.htm">学校教师主页</a></footer>
+    <footer>
+      <a href="https://faculty.nuist.edu.cn/zijinli/zh_CN/index.htm">学校教师主页</a>
+      <p class="visit-counter">
+        <span>今日来访量 / 总来访量 · — / —</span>
+        <img hidden alt="今日来访量 / 总来访量" height="20" referrerpolicy="no-referrer">
+      </p>
+    </footer>
   </main>
+  <script type="module">
+    const site = new URL('.', window.location.href);
+    if (site.protocol === 'https:') {
+      const counter = document.querySelector('.visit-counter');
+      const badge = counter.querySelector('img');
+      const url = new URL('https://hits.sh/');
+      // Both language pages live in the same directory and share one counter.
+      url.pathname = '/' + site.hostname + site.pathname.slice(0, -1) + '.svg';
+      url.search = new URLSearchParams({
+        view: 'today-total',
+        style: 'flat-square',
+        label: badge.alt,
+        color: '78533d',
+        labelColor: '52575e',
+      });
+      badge.addEventListener('load', () => {
+        counter.querySelector('span').hidden = true;
+        badge.hidden = false;
+      }, { once: true });
+      badge.src = url.href;
+    }
+  </script>
 </body>
 </html>
