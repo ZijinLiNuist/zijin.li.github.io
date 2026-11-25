@@ -82,7 +82,19 @@ section > p { margin: 0; }
 .timeline-note { margin: .06rem 0 0; }
 .grouped-section > h3 { margin-bottom: .55rem; }
 .grouped-section > ul + h3 { margin-top: 1.2rem; }
-.supervision-contact { margin-bottom: 1rem; }
+.supervision-email { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .6rem; margin: .35rem 0 1rem; }
+.supervision-email button {
+  padding: .12rem .45rem;
+  border: 1px solid var(--rule);
+  border-radius: .2rem;
+  color: var(--link);
+  background: #fff;
+  font: inherit;
+  font-size: .875rem;
+  cursor: pointer;
+}
+.supervision-email button:hover { background: #f2f5f7; }
+.supervision-email [role="status"] { color: var(--muted); font-size: .875rem; }
 .teaching-columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

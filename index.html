@@ -306,7 +306,12 @@
     </section>
     <section id="supervision" class="grouped-section">
       <h2>Graduate supervision</h2>
-      <p class="supervision-contact">Prospective graduate students interested in partial differential equations and mathematical fluid mechanics are welcome to <a href="mailto:zijinli@nuist.edu.cn">contact me by email</a>. Please attach your CV.</p>
+      <p>Prospective graduate students interested in partial differential equations and mathematical fluid mechanics are welcome to contact me by email. Please attach your CV.</p>
+      <p class="supervision-email">
+        <a href="mailto:zijinli@nuist.edu.cn">zijinli@nuist.edu.cn</a>
+        <button type="button" data-copied="Email address copied" data-selected="The email address is selected for manual copying." hidden>Copy email address</button>
+        <span role="status"></span>
+      </p>
       <h3>Master’s graduates</h3>
       <ul class="timeline">
     <li>
@@ -490,6 +495,25 @@
     window.addEventListener('scroll', updateLanguageLink, { passive: true });
     window.addEventListener('hashchange', updateLanguageLink);
     window.addEventListener('pageshow', updateLanguageLink);
+
+    const supervisionEmail = document.querySelector('.supervision-email');
+    const emailAddress = supervisionEmail.querySelector('a');
+    const copyEmail = supervisionEmail.querySelector('button');
+    const copyStatus = supervisionEmail.querySelector('[role="status"]');
+    copyEmail.hidden = false;
+    copyEmail.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(emailAddress.textContent);
+        copyStatus.textContent = copyEmail.dataset.copied;
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(emailAddress);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        copyStatus.textContent = copyEmail.dataset.selected;
+      }
+    });
 
     const site = new URL('.', window.location.href);
     if (site.protocol === 'https:') {

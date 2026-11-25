@@ -306,7 +306,12 @@
     </section>
     <section id="supervision" class="grouped-section">
       <h2>人才培养</h2>
-      <p class="supervision-contact">欢迎对偏微分方程和数学流体力学感兴趣的同学<a href="mailto:zijinli@nuist.edu.cn">邮件联系</a>。请在来信时附上个人简历。</p>
+      <p>欢迎对偏微分方程和数学流体力学感兴趣的同学邮件联系。请在来信时附上个人简历。</p>
+      <p class="supervision-email">
+        <a href="mailto:zijinli@nuist.edu.cn">zijinli@nuist.edu.cn</a>
+        <button type="button" data-copied="已复制邮箱" data-selected="邮箱已选中，可手动复制。" hidden>复制邮箱</button>
+        <span role="status"></span>
+      </p>
       <h3>已毕业硕士生</h3>
       <ul class="timeline">
     <li>
@@ -490,6 +495,25 @@
     window.addEventListener('scroll', updateLanguageLink, { passive: true });
     window.addEventListener('hashchange', updateLanguageLink);
     window.addEventListener('pageshow', updateLanguageLink);
+
+    const supervisionEmail = document.querySelector('.supervision-email');
+    const emailAddress = supervisionEmail.querySelector('a');
+    const copyEmail = supervisionEmail.querySelector('button');
+    const copyStatus = supervisionEmail.querySelector('[role="status"]');
+    copyEmail.hidden = false;
+    copyEmail.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(emailAddress.textContent);
+        copyStatus.textContent = copyEmail.dataset.copied;
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(emailAddress);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        copyStatus.textContent = copyEmail.dataset.selected;
+      }
+    });
 
     const site = new URL('.', window.location.href);
     if (site.protocol === 'https:') {
