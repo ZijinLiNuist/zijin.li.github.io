@@ -32,6 +32,10 @@
         <p>Associate Professor · School of Mathematics and Statistics · Nanjing University of Information Science and Technology</p>
         <p>Deputy Director, Research Center for Mathematical Sciences, Nanjing University of Information Science and Technology</p>
         <p><a href="mailto:zijinli@nuist.edu.cn">zijinli@nuist.edu.cn</a></p>
+        <p class="profile-links">
+          <a href="https://faculty.nuist.edu.cn/zijinli/en/index.htm" target="_blank" rel="noopener">NUIST faculty profile</a>
+          <a href="https://www.researchgate.net/profile/Zijin-Li-4" target="_blank" rel="noopener">ResearchGate</a>
+        </p>
       </div>
       <img src="profile.jpg" alt="Zijin Li" width="262" height="323">
     </div>
@@ -302,6 +306,7 @@
     </section>
     <section id="supervision" class="grouped-section">
       <h2>Graduate supervision</h2>
+      <p class="supervision-contact">Prospective graduate students interested in partial differential equations and mathematical fluid mechanics are welcome to <a href="mailto:zijinli@nuist.edu.cn">contact me by email</a>. Please attach your CV.</p>
       <h3>Master’s graduates</h3>
       <ul class="timeline">
     <li>
@@ -455,7 +460,6 @@
   </ul>
     </section>
     <footer>
-      <a href="https://faculty.nuist.edu.cn/zijinli/zh_CN/index.htm">NUIST faculty profile</a>
       <p class="visit-counter">
         <span>Visits today / total · — / —</span>
         <img hidden alt="Visits today / total" height="20" referrerpolicy="no-referrer">
@@ -463,6 +467,30 @@
     </footer>
   </main>
   <script type="module">
+    const header = document.querySelector('.site-header');
+    const languageLink = header.querySelector('.languages a');
+    const destination = new URL(languageLink.href);
+    const sections = [...document.querySelectorAll('main > section[id], .publication-group[id]')].reverse();
+
+    function updateLanguageLink() {
+      const readingLine = header.getBoundingClientRect().bottom + 16;
+      const section = sections.find(item => item.getBoundingClientRect().top <= readingLine);
+      destination.hash = section?.id ?? '';
+      if (languageLink.href !== destination.href) languageLink.href = destination.href;
+    }
+
+    function syncHeader() {
+      document.documentElement.style.setProperty('--site-header-height', header.offsetHeight + 'px');
+      updateLanguageLink();
+    }
+
+    header.classList.add('is-sticky');
+    syncHeader();
+    new ResizeObserver(syncHeader).observe(header);
+    window.addEventListener('scroll', updateLanguageLink, { passive: true });
+    window.addEventListener('hashchange', updateLanguageLink);
+    window.addEventListener('pageshow', updateLanguageLink);
+
     const site = new URL('.', window.location.href);
     if (site.protocol === 'https:') {
       const counter = document.querySelector('.visit-counter');

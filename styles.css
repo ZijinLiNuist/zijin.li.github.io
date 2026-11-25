@@ -8,6 +8,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: calc(var(--site-header-height, 0px) + .5rem); }
 body { margin: 0; }
 a { color: var(--link); text-underline-offset: .18em; }
 a:hover { text-decoration-thickness: .13em; }
@@ -17,7 +18,7 @@ a:hover { text-decoration-thickness: .13em; }
 .skip {
   position: absolute;
   inset: .5rem auto auto .5rem;
-  z-index: 1;
+  z-index: 3;
   padding: .4rem .7rem;
   background: #fff;
   transform: translateY(-150%);
@@ -33,6 +34,7 @@ a:hover { text-decoration-thickness: .13em; }
   border-bottom: 1px solid var(--rule);
   font-size: .9375rem;
 }
+.site-header.is-sticky { position: sticky; top: 0; z-index: 2; background: #fff; }
 .site-name { color: inherit; font-size: 1rem; font-weight: 650; text-decoration: none; }
 .main-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .25rem 1rem; }
 .main-nav a { text-decoration: none; }
@@ -52,6 +54,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 650; line-height: 1.3; }
 h1 { font-size: clamp(1.8rem, 5vw, 2.25rem); margin-bottom: .55rem; }
 h1 span { color: var(--muted); font-size: .58em; font-weight: 500; white-space: nowrap; }
 .profile p { margin: .25rem 0 0; overflow-wrap: anywhere; }
+.profile-links { display: flex; flex-wrap: wrap; gap: .15rem .9rem; }
 
 section, footer { border-top: 1px solid var(--rule); padding-block: 1.35rem; }
 h2 { font-size: 1.375rem; margin-bottom: .65rem; }
@@ -79,6 +82,7 @@ section > p { margin: 0; }
 .timeline-note { margin: .06rem 0 0; }
 .grouped-section > h3 { margin-bottom: .55rem; }
 .grouped-section > ul + h3 { margin-top: 1.2rem; }
+.supervision-contact { margin-bottom: 1rem; }
 .teaching-columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -97,7 +101,7 @@ section > p { margin: 0; }
 .photo-gallery figcaption { color: var(--muted); font-size: .875rem; line-height: 1.45; margin-top: .3rem; }
 #talks .photo-gallery img { aspect-ratio: auto; }
 footer { font-size: .9375rem; }
-.visit-counter { margin: .55rem 0 0; color: var(--muted); }
+.visit-counter { margin: 0; color: var(--muted); }
 .visit-counter img { max-width: 100%; height: 20px; vertical-align: middle; }
 
 @media (max-width: 44rem) {
